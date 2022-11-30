@@ -113,8 +113,11 @@ public class EmployeeServiceImplTest {
         Mockito.when(validator.validate(Mockito.any())).thenReturn(Collections.emptySet());
         Mockito.when(employeeRepository.existsByEmail(Mockito.any())).thenReturn(Boolean.FALSE);
         Mockito.when(employeeRepository.existsByNis(Mockito.any())).thenReturn(Boolean.FALSE);
+        Mockito.when(employeeRepository.save(Mockito.any(Employee.class))).thenReturn(employee);
 
-        Assertions.assertThatNoException().isThrownBy(() -> employeeService.create(employee));
+        Employee employeeResponse = employeeService.create(employee);
+
+        Assertions.assertThat(employeeResponse).usingRecursiveComparison().isEqualTo(employee);
     }
 
     @Test

@@ -13,7 +13,7 @@ public interface EmployeeService {
 
     Page<Employee> getAll(Pageable pageable);
 
-    void create(Employee employee);
+    Employee create(Employee employee);
 
     void update(UUID id, Employee employee);
 

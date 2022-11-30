@@ -56,10 +56,10 @@ public class EmployeeController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Create new employee")
-    public void create(@RequestBody EmployeeVO employee) {
-        employeeService.create(employeeMapper.toEntity(employee));
+    public EmployeeVO create(@RequestBody EmployeeVO employee) {
+        return employeeMapper.toVo(employeeService.create(employeeMapper.toEntity(employee)));
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)

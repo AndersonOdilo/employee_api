@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void create(Employee employee) {
+    public Employee create(Employee employee) {
         validate(employee);
 
         if (employeeRepository.existsByEmail(employee.getEmail())) {
@@ -55,7 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new AlreadyUsedElementException("the PIS is already in use");
         }
 
-        employeeRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 
     @Override
